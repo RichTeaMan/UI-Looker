@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UiLooker"
         xmlns:models="clr-namespace:UiLooker.PresentationModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="UI Looker" Height="600" Width="800" Icon="icon.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
