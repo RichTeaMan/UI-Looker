@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TextBox Name="uiResults" HorizontalAlignment="Left" Height="274" Margin="51,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="320"/>
+        <TextBox Name="uiResults" HorizontalAlignment="Left" Height="274" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="266"/>
+        <TreeView Name="treeview_ui" HorizontalAlignment="Left" Height="274" Margin="281,10,0,0" VerticalAlignment="Top" Width="226"/>
 
     </Grid>
 </Window>
