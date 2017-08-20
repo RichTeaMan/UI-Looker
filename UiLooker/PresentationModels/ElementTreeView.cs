@@ -13,7 +13,7 @@ namespace UiLooker.PresentationModels
         public string ClassName { get; set; }
         public string Name { get; set; }
 
-        public string Display { get { return $"Id: {AutomationId}, Name: {Name}"; } }
+        public string Display { get { return $"Id: {AutomationId}, Name: {Name}, Control Type: {ControlType}"; } }
 
         public List<ElementTreeView> Children { get; set; }
     }
