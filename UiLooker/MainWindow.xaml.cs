@@ -123,6 +123,17 @@ namespace UiLooker
             }
         }
 
+        private void Refresh_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (_window != null)
+            {
+                LoadUiElements();
+            } else
+            {
+                MessageBox.Show("No application to refresh.");
+            }
+        }
+
         private void treeview_ui_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var element = (ElementTreeView)e.NewValue;

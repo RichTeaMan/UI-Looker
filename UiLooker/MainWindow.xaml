@@ -18,8 +18,8 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_Open" Click="Open_MenuItem_Click">
-                </MenuItem>
+                <MenuItem Header="_Open" Click="Open_MenuItem_Click" />
+                <MenuItem Header="_Refresh" Click="Refresh_MenuItem_Click" />
             </Menu>
         </DockPanel>
         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" >
