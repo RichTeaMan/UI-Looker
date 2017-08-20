@@ -77,6 +77,10 @@ namespace UiLooker
                 rootElementTreeView = AddChildElements(main);
             }
 
+            _context.UiElementTree = rootElementTreeView;
+            _context.SelectedUiElement = rootElementTreeView;
+
+            // can't get tree view to bind directly from the xaml. I'm over it.
             treeview_ui.ItemsSource = new List<ElementTreeView> { rootElementTreeView };
         }
 
@@ -97,6 +101,12 @@ namespace UiLooker
             }
             elementTreeView.Children = children;
             return elementTreeView;
+        }
+
+        private void treeview_ui_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var element = (ElementTreeView)e.NewValue;
+            _context.SelectedUiElement = element;
         }
     }
 }

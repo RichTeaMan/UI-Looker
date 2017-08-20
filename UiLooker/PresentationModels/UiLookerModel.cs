@@ -10,6 +10,9 @@ namespace UiLooker.PresentationModels
     public class UiLookerModel : INotifyPropertyChanged
     {
         private ElementTreeView _uiElementTree;
+
+        private ElementTreeView _selectedUiElement;
+
         public ElementTreeView UiElementTree
         {
             get { return _uiElementTree; }
@@ -17,6 +20,16 @@ namespace UiLooker.PresentationModels
             {
                 _uiElementTree = value;
                 OnPropertyChanged(nameof(UiElementTree));
+            }
+        }
+
+        public ElementTreeView SelectedUiElement
+        {
+            get { return _selectedUiElement; }
+            set
+            {
+                _selectedUiElement = value;
+                OnPropertyChanged(nameof(SelectedUiElement));
             }
         }
 
