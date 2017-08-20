@@ -13,18 +13,22 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="0" >
-            <TreeView Name="treeview_ui" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" >
+            <TreeView Name="treeview_ui" ItemsSource="{Binding Path=UiElementTree}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                 <TreeView.Resources>
-                    <HierarchicalDataTemplate DataType = "{x:Type models:ElementTreeView}"
-                                      ItemsSource = "{Binding Path=Children}">
+                    <HierarchicalDataTemplate DataType="{x:Type models:ElementTreeView}"
+                                      ItemsSource="{Binding Path=Children}">
                         <TextBlock Text="{Binding Path=Name}"/>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
             </TreeView>
         </ScrollViewer>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            
+        </StackPanel>
 
 
     </Grid>

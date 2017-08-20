@@ -25,16 +25,23 @@ namespace UiLooker
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        /// <summary>
+        /// Application loader.
+        /// </summary>
         private ApplicationLoader _applicationLoader;
-        private HashSet<AutomationElement> autoSet = new HashSet<AutomationElement>();
+
+        private UiLookerModel _context;
+
         public MainWindow()
         {
             _applicationLoader = new ApplicationLoader();
+            _context = new UiLookerModel();
 
             InitializeComponent();
 
             this.Loaded += MainWindow_Loaded;
+
+            DataContext = _context;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
