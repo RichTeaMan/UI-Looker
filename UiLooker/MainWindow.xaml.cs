@@ -20,9 +20,35 @@ namespace UiLooker
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private ApplicationLoader _applicationLoader;
+
         public MainWindow()
         {
+            _applicationLoader = new ApplicationLoader();
+
             InitializeComponent();
+
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadUiElements();
+        }
+
+        private void LoadUiElements()
+        {
+            var mainWindow = _applicationLoader.FetchMainWindow();
+
+            List<string> elementLines = new List<string>();
+            var elements = mainWindow.FindAllDescendants();
+            foreach(var element in elements)
+            {
+                elementLines.Add(element.ToString());
+            }
+
+            uiResults.Text = string.Join(Environment.NewLine, elementLines);
         }
     }
 }
