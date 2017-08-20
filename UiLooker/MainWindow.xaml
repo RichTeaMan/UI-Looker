@@ -13,9 +13,15 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <DockPanel Grid.ColumnSpan="2">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Open" Click="Open_MenuItem_Click">
+                </MenuItem>
+            </Menu>
+        </DockPanel>
         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" >
             <TreeView Name="treeview_ui" ItemsSource="{Binding Path=UiElementTree}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedItemChanged="treeview_ui_SelectedItemChanged" >
                 <TreeView.Resources>

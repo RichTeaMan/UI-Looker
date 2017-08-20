@@ -12,17 +12,12 @@ namespace UiLooker
 {
     public class ApplicationLoader
     {
-        public Application BindToOpenApp()
+
+        public Window FetchMainWindow(string applicationPath)
         {
-            var processInfo = new ProcessStartInfo(@"D:\Projects\UiLooker\TextBoxBoxSocial\bin\Debug\TextBoxBoxSocial.exe");
+            var processInfo = new ProcessStartInfo(applicationPath);
             var application = Application.AttachOrLaunch(processInfo);
 
-            return application;
-        }
-
-        public Window FetchMainWindow()
-        {
-            var application = BindToOpenApp();
             var automation = new UIA3Automation();
             var window = application.GetMainWindow(automation);
             return window;
