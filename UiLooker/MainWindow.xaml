@@ -26,31 +26,37 @@
                 </TreeView.Resources>
             </TreeView>
         </ScrollViewer>
-        <Grid Grid.Column="1" Grid.Row="1" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-            </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1">
 
-            <Label Grid.Column="0" Grid.Row="0" Content="AutomationId"/>
-            <Label Grid.Column="1" Grid.Row="0" Content="{Binding Path=SelectedUiElement.AutomationId}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="1" Content="Name"/>
-            <Label Grid.Column="1" Grid.Row="1" Content="{Binding Path=SelectedUiElement.Name}"/>
+                <Label Grid.Column="0" Grid.Row="0" Content="AutomationId"/>
+                <Label Grid.Column="1" Grid.Row="0" Content="{Binding Path=SelectedUiElement.AutomationId}"/>
 
-            <Label Grid.Column="0" Grid.Row="2" Content="ControlType"/>
-            <Label Grid.Column="1" Grid.Row="2" Content="{Binding Path=SelectedUiElement.ControlType}"/>
+                <Label Grid.Column="0" Grid.Row="1" Content="Name"/>
+                <Label Grid.Column="1" Grid.Row="1" Content="{Binding Path=SelectedUiElement.Name}"/>
 
-            <Label Grid.Column="0" Grid.Row="3" Content="ClassName"/>
-            <Label Grid.Column="1" Grid.Row="3" Content="{Binding Path=SelectedUiElement.ClassName}"/>
+                <Label Grid.Column="0" Grid.Row="2" Content="ControlType"/>
+                <Label Grid.Column="1" Grid.Row="2" Content="{Binding Path=SelectedUiElement.ControlType}"/>
 
-        </Grid>
+                <Label Grid.Column="0" Grid.Row="3" Content="ClassName"/>
+                <Label Grid.Column="1" Grid.Row="3" Content="{Binding Path=SelectedUiElement.ClassName}"/>
+
+            </Grid>
+            <Label Content="Actions"></Label>
+            <Button Name="invokeBtn" Content="Invoke Control" Click="Invoke_Button_Click"/>
+
+        </StackPanel>
 
 
     </Grid>

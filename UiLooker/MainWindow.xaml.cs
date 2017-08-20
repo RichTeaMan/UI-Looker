@@ -108,5 +108,31 @@ namespace UiLooker
             var element = (ElementTreeView)e.NewValue;
             _context.SelectedUiElement = element;
         }
+
+        private void Invoke_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var autoId = _context.SelectedUiElement.AutomationId;
+            if (!string.IsNullOrEmpty(autoId))
+            {
+                var mainWindow = _applicationLoader.FetchMainWindow();
+                var element = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(autoId));
+                if (element == null)
+                {
+                    MessageBox.Show("Element could not be found.");
+                }
+                else
+                {
+                    var invokePattern = element.Patterns.Invoke.PatternOrDefault;
+                    if (invokePattern != null)
+                    {
+                        invokePattern.Invoke();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Control is not invokable.");
+                    }
+                }
+            }
+        }
     }
 }
