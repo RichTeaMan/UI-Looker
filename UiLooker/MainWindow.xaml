@@ -4,11 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UiLooker"
+        xmlns:models="clr-namespace:UiLooker.PresentationModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TextBox Name="uiResults" HorizontalAlignment="Left" Height="274" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="266"/>
-        <TreeView Name="treeview_ui" HorizontalAlignment="Left" Height="274" Margin="281,10,0,0" VerticalAlignment="Top" Width="226"/>
+        <TreeView Name="treeview_ui" HorizontalAlignment="Left" Height="274" VerticalAlignment="Top" Width="226">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType = "{x:Type models:ElementTreeView}"
+                                      ItemsSource = "{Binding Path=Children}">
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
 
     </Grid>
 </Window>

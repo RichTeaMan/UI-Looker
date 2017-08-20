@@ -13,6 +13,6 @@ namespace UiLooker.PresentationModels
         public string ClassName { get; set; }
         public string Name { get; set; }
 
-        public List<string> Children { get; set; }
+        public List<ElementTreeView> Children { get; set; }
     }
 }

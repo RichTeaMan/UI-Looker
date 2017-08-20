@@ -59,66 +59,37 @@ namespace UiLooker
             cacheRequest.Add(mainWindow.Automation.PropertyLibrary.Element.FrameworkId);
 
             List<ElementTreeView> elementTreeViewList = new List<ElementTreeView>();
-            
-            int childrenFilled = 0;
+            ElementTreeView rootElementTreeView;
+
             using (cacheRequest.Activate())
             {
                 var elements = mainWindow.FindAll(TreeScope.Subtree, new TrueCondition());
-                //Console.WriteLine(elementCached.Properties.AutomationId.Value);
-                //Console.WriteLine(elementCached.Properties.Name.Value);
-
-                foreach (var e in elements)
-                {
-                    var elementTreeView = new ElementTreeView()
-                    {
-                        AutomationId = e.Properties.AutomationId.ValueOrDefault,
-                        Name = e.Properties.Name.ValueOrDefault,
-                        ClassName = e.Properties.ClassName.ValueOrDefault
-                    };
-                    elementTreeViewList.Add(elementTreeView);
-
-                    if (e.CachedChildren.Length > 0)
-                    {
-                        childrenFilled++;
-                    }
-                }
+             
+                // first should be the main window
+                var main = elements.First();
+                rootElementTreeView = AddChildElements(main);
             }
 
-            var elementsAndParents = new Dictionary<ElementTreeView, List<ElementTreeView>>();
-
-            foreach (var element in elementTreeViewList)
-            {
-                elementLines.Add($"{element.Name}");
-
-                List<ElementTreeView> parentList;
-                if (!elementsAndParents.TryGetValue(element, out parentList))
-                {
-                    parentList = new List<ElementTreeView>();
-                    elementsAndParents.Add(element, parentList);
-                }
-                //parentList.AddRange(element.Children);
-            }
-
-            uiResults.Text = string.Join(Environment.NewLine, elementLines);
-
-
-            treeview_ui.Items.Add(root);
-            AddChildElements(elementTreeViewList.First(), root, elementsAndParents);
+            treeview_ui.ItemsSource = new List<ElementTreeView> { rootElementTreeView };
         }
 
 
-        private void AddChildElements(ElementTreeView element, TreeViewItem treeViewItem, Dictionary<ElementTreeView, List<ElementTreeView>> elementsAndParents)
+        private ElementTreeView AddChildElements(AutomationElement element)
         {
-            List<ElementTreeView> elements;
-            if (elementsAndParents.TryGetValue(element, out elements))
+            var elementTreeView = new ElementTreeView()
             {
-                foreach (var child in elements)
-                {
-                    var childTreeItem = new TreeViewItem() { Header = $"{child.Name}" };
-                    treeViewItem.Items.Add(childTreeItem);
-                    AddChildElements(child, childTreeItem, elementsAndParents);
-                }
+                AutomationId = element.Properties.AutomationId.ValueOrDefault,
+                Name = element.Properties.Name.ValueOrDefault,
+                ClassName = element.Properties.ClassName.ValueOrDefault
+            };
+            var children = new List<ElementTreeView>();
+            foreach (var child in element.CachedChildren)
+            {
+                var childView = AddChildElements(child);
+                children.Add(childView);
             }
+            elementTreeView.Children = children;
+            return elementTreeView;
         }
     }
 }
