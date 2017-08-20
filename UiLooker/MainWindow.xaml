@@ -53,8 +53,32 @@
                 <Label Grid.Column="1" Grid.Row="3" Content="{Binding Path=SelectedUiElement.ClassName}"/>
 
             </Grid>
-            <Label Content="Actions"></Label>
-            <Button Name="invokeBtn" Content="Invoke Control" Click="Invoke_Button_Click"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Content="Actions"></Label>
+                <Button Name="invokeBtn" Grid.Column="0" Grid.Row="1" Content="Invoke Control" Click="Invoke_Button_Click"/>
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Content="Supported Patterns"></Label>
+                <ListView Grid.Column="0" Grid.Row="1" Name="lvDataBinding" ItemsSource="{Binding Path=SupportedPatterns}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="Name: " />
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
 
         </StackPanel>
 

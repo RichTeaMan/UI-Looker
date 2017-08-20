@@ -71,7 +71,7 @@ namespace UiLooker
             using (cacheRequest.Activate())
             {
                 var elements = mainWindow.FindAll(TreeScope.Subtree, new TrueCondition());
-             
+
                 // first should be the main window
                 var main = elements.First();
                 rootElementTreeView = AddChildElements(main);
@@ -107,30 +107,55 @@ namespace UiLooker
         {
             var element = (ElementTreeView)e.NewValue;
             _context.SelectedUiElement = element;
+
+            var automationElement = fetchSelectedElement();
+            var patterns = new List<UiPattern>();
+            if (null != automationElement)
+            {
+                patterns.AddRange(automationElement.GetSupportedPatterns().Select(p => new UiPattern() { Name = p.Name }));
+            }
+            _context.SupportedPatterns = patterns.AsReadOnly();
+        }
+
+        /// <summary>
+        /// Fetches the selected automation element. May return null if the element cannot be found.
+        /// </summary>
+        /// <returns></returns>
+        private AutomationElement fetchSelectedElement()
+        {
+            AutomationElement automationElement = null;
+            if (!string.IsNullOrEmpty(_context.SelectedUiElement.AutomationId))
+            {
+                var mainWindow = _applicationLoader.FetchMainWindow();
+                automationElement = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(_context.SelectedUiElement.AutomationId));
+            }
+
+            if (automationElement == null && !string.IsNullOrEmpty(_context.SelectedUiElement.Name))
+            {
+                var mainWindow = _applicationLoader.FetchMainWindow();
+                automationElement = mainWindow.FindFirstDescendant(cf => cf.ByName(_context.SelectedUiElement.Name));
+            }
+            return automationElement;
         }
 
         private void Invoke_Button_Click(object sender, RoutedEventArgs e)
         {
-            var autoId = _context.SelectedUiElement.AutomationId;
-            if (!string.IsNullOrEmpty(autoId))
+            var mainWindow = _applicationLoader.FetchMainWindow();
+            var element = fetchSelectedElement();
+            if (element == null)
             {
-                var mainWindow = _applicationLoader.FetchMainWindow();
-                var element = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(autoId));
-                if (element == null)
+                MessageBox.Show("Element could not be found.");
+            }
+            else
+            {
+                var invokePattern = element.Patterns.Invoke.PatternOrDefault;
+                if (invokePattern != null)
                 {
-                    MessageBox.Show("Element could not be found.");
+                    invokePattern.Invoke();
                 }
                 else
                 {
-                    var invokePattern = element.Patterns.Invoke.PatternOrDefault;
-                    if (invokePattern != null)
-                    {
-                        invokePattern.Invoke();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Control is not invokable.");
-                    }
+                    MessageBox.Show("Control is not invokable.");
                 }
             }
         }

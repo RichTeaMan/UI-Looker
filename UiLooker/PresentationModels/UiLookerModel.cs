@@ -13,6 +13,8 @@ namespace UiLooker.PresentationModels
 
         private ElementTreeView _selectedUiElement;
 
+        private IReadOnlyList<UiPattern> _supportedPatterns;
+
         public ElementTreeView UiElementTree
         {
             get { return _uiElementTree; }
@@ -30,6 +32,16 @@ namespace UiLooker.PresentationModels
             {
                 _selectedUiElement = value;
                 OnPropertyChanged(nameof(SelectedUiElement));
+            }
+        }
+
+        public IReadOnlyList<UiPattern> SupportedPatterns
+        {
+            get { return _supportedPatterns; }
+            set
+            {
+                _supportedPatterns = value;
+                OnPropertyChanged(nameof(SupportedPatterns));
             }
         }
 
