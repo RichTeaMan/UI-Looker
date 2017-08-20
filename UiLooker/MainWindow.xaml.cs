@@ -149,9 +149,14 @@ namespace UiLooker
             else
             {
                 var invokePattern = element.Patterns.Invoke.PatternOrDefault;
+                var selectionItemPattern = element.Patterns.SelectionItem.PatternOrDefault;
                 if (invokePattern != null)
                 {
                     invokePattern.Invoke();
+                }
+                else if (selectionItemPattern != null)
+                {
+                    selectionItemPattern.Select();
                 }
                 else
                 {
