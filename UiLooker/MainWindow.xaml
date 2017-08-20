@@ -8,14 +8,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TreeView Name="treeview_ui" HorizontalAlignment="Left" Height="274" VerticalAlignment="Top" Width="226">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType = "{x:Type models:ElementTreeView}"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="0" >
+            <TreeView Name="treeview_ui" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType = "{x:Type models:ElementTreeView}"
                                       ItemsSource = "{Binding Path=Children}">
-                    <TextBlock Text="{Binding Path=Name}"/>
-                </HierarchicalDataTemplate>
-            </TreeView.Resources>
-        </TreeView>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+        </ScrollViewer>
+
 
     </Grid>
 </Window>
