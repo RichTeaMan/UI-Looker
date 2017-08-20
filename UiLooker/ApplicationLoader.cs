@@ -14,7 +14,7 @@ namespace UiLooker
     {
         public Application BindToOpenApp()
         {
-            var processInfo = new ProcessStartInfo(@"D:\Projects\White\src\TestApplications\WindowsFormsTestApplication\bin\Debug\WindowsFormsTestApplication.exe");
+            var processInfo = new ProcessStartInfo(@"D:\Projects\UiLooker\TextBoxBoxSocial\bin\Debug\TextBoxBoxSocial.exe");
             var application = Application.AttachOrLaunch(processInfo);
 
             return application;

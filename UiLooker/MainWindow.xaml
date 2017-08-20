@@ -21,7 +21,7 @@
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type models:ElementTreeView}"
                                       ItemsSource="{Binding Path=Children}">
-                        <TextBlock Text="{Binding Path=Name}"/>
+                        <TextBlock Text="{Binding Path=Display}"/>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
             </TreeView>
@@ -60,6 +60,17 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0" Content="Actions"></Label>
                 <Button Name="invokeBtn" Grid.Column="0" Grid.Row="1" Content="Invoke Control" Click="Invoke_Button_Click"/>
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Content="Change Value"></Label>
+                <TextBox Name="changeValueTb" Grid.Column="0" Grid.Row="1"  />
+                <Button Name="changeValueBtn" Grid.Column="0" Grid.Row="2" Content="Change Value" Click="Change_Value_Btn_Click"/>
             </Grid>
 
             <Grid>

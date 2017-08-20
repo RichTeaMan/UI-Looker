@@ -52,6 +52,7 @@ namespace UiLooker
         private void LoadUiElements()
         {
             var mainWindow = _applicationLoader.FetchMainWindow();
+
             var root = new TreeViewItem() { Header = mainWindow.Title };
 
             List<string> elementLines = new List<string>();
@@ -91,7 +92,8 @@ namespace UiLooker
             {
                 AutomationId = element.Properties.AutomationId.ValueOrDefault,
                 Name = element.Properties.Name.ValueOrDefault,
-                ClassName = element.Properties.ClassName.ValueOrDefault
+                ClassName = element.Properties.ClassName.ValueOrDefault,
+                ControlType = element.Properties.ControlType.ValueOrDefault.ToString()
             };
             var children = new List<ElementTreeView>();
             foreach (var child in element.CachedChildren)
@@ -108,7 +110,7 @@ namespace UiLooker
             var element = (ElementTreeView)e.NewValue;
             _context.SelectedUiElement = element;
 
-            var automationElement = fetchSelectedElement();
+            var automationElement = FetchSelectedElement();
             var patterns = new List<UiPattern>();
             if (null != automationElement)
             {
@@ -121,7 +123,7 @@ namespace UiLooker
         /// Fetches the selected automation element. May return null if the element cannot be found.
         /// </summary>
         /// <returns></returns>
-        private AutomationElement fetchSelectedElement()
+        private AutomationElement FetchSelectedElement()
         {
             AutomationElement automationElement = null;
             if (!string.IsNullOrEmpty(_context.SelectedUiElement.AutomationId))
@@ -141,7 +143,7 @@ namespace UiLooker
         private void Invoke_Button_Click(object sender, RoutedEventArgs e)
         {
             var mainWindow = _applicationLoader.FetchMainWindow();
-            var element = fetchSelectedElement();
+            var element = FetchSelectedElement();
             if (element == null)
             {
                 MessageBox.Show("Element could not be found.");
@@ -161,6 +163,28 @@ namespace UiLooker
                 else
                 {
                     MessageBox.Show("Control is not invokable.");
+                }
+            }
+        }
+
+        private void Change_Value_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = _applicationLoader.FetchMainWindow();
+            var element = FetchSelectedElement();
+            if (element == null)
+            {
+                MessageBox.Show("Element could not be found.");
+            }
+            else
+            {
+                var valuePattern = element.Patterns.Value.PatternOrDefault;
+                if (valuePattern != null)
+                {
+                    valuePattern.SetValue(changeValueTb.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Control does not have an editable value.");
                 }
             }
         }
