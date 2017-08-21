@@ -15,6 +15,8 @@ namespace UiLooker.PresentationModels
 
         public string Display { get { return $"Id: {AutomationId}, Name: {Name}, Control Type: {ControlType}"; } }
 
+        public string CSharpGetterCode { get; set; }
+
         public List<ElementTreeView> Children { get; set; }
     }
 }

@@ -44,19 +44,24 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Column="0" Grid.Row="0" Content="AutomationId"/>
+                <Label Grid.Column="0" Grid.Row="0" Content="Automation ID"/>
                 <Label Grid.Column="1" Grid.Row="0" Content="{Binding Path=SelectedUiElement.AutomationId}"/>
 
                 <Label Grid.Column="0" Grid.Row="1" Content="Name"/>
                 <Label Grid.Column="1" Grid.Row="1" Content="{Binding Path=SelectedUiElement.Name}"/>
 
-                <Label Grid.Column="0" Grid.Row="2" Content="ControlType"/>
+                <Label Grid.Column="0" Grid.Row="2" Content="Control Type"/>
                 <Label Grid.Column="1" Grid.Row="2" Content="{Binding Path=SelectedUiElement.ControlType}"/>
 
-                <Label Grid.Column="0" Grid.Row="3" Content="ClassName"/>
+                <Label Grid.Column="0" Grid.Row="3" Content="Class Name"/>
                 <Label Grid.Column="1" Grid.Row="3" Content="{Binding Path=SelectedUiElement.ClassName}"/>
+
+                <Label Grid.Column="0" Grid.Row="4" Content="C# Getter Code"/>
+                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=SelectedUiElement.CSharpGetterCode}"/>
+
 
             </Grid>
             <Grid>

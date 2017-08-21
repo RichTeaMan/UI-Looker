@@ -31,6 +31,8 @@ namespace UiLooker
         /// </summary>
         private ApplicationLoader _applicationLoader;
 
+        private CodeGeneratorService _codeGeneratorService;
+
         private FlaUI.Core.AutomationElements.Window _window;
 
         private UiLookerModel _context;
@@ -38,6 +40,7 @@ namespace UiLooker
         public MainWindow()
         {
             _applicationLoader = new ApplicationLoader();
+            _codeGeneratorService = new CodeGeneratorService();
             _context = new UiLookerModel();
 
             InitializeComponent();
@@ -138,6 +141,14 @@ namespace UiLooker
         {
             var element = (ElementTreeView)e.NewValue;
             _context.SelectedUiElement = element;
+            
+            try
+            {
+                element.CSharpGetterCode = _codeGeneratorService.GenerateCSharpGetter(element, _window);
+            } catch(Exception ex)
+            {
+                element.CSharpGetterCode = ex.Message;
+            }
 
             var automationElement = FetchSelectedElement();
             var patterns = new List<UiPattern>();
@@ -147,6 +158,8 @@ namespace UiLooker
             }
             _context.SupportedPatterns = patterns.AsReadOnly();
         }
+
+        
 
         /// <summary>
         /// Fetches the selected automation element. May return null if the element cannot be found.
